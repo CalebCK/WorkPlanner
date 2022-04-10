@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "ad5c428e-8574-4816-99b3-05c30a7a8f77",
+		"name": "Work Planner API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Last Processed Shift",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}api/v1/workplan",
+					"host": [
+						"{{baseUrl}}api"
+					],
+					"path": [
+						"v1",
+						"workplan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request Plan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"workerNames\": [\r\n    \"Caleb\",\"Appiah\",\"Gertrude\",\"Apreku\", \"Daniel\", \"Frank\"\r\n  ],\r\n  \"numberOfDays\": 8\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}api/v1/workplan",
+					"host": [
+						"{{baseUrl}}api"
+					],
+					"path": [
+						"v1",
+						"workplan"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:44374/",
+			"type": "string"
+		}
+	]
+}
