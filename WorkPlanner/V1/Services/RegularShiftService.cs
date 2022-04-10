@@ -24,14 +24,22 @@ namespace WorkPlanner.V1.Services
             var responseDto = new List<ShiftPlanResponseDto>();
 
             var workersRaw = _serviceHelper.GetWorkers(request.WorkerNames);
-            var workers = workersRaw.GetEnumerator();
             var availableWorkingDays = _serviceHelper.CreateWorkDays(request.NumberOfDays);
+
+            DeepProcessor(workersRaw, availableWorkingDays, ref responseDto);
+
+            return responseDto;
+        }
+
+        private void DeepProcessor(IEnumerable<Worker> workersRaw, List<WorkDay> availableWorkingDays, ref List<ShiftPlanResponseDto> responseDto)
+        {
+            var workers = workersRaw.GetEnumerator();
 
             foreach (var day in availableWorkingDays)
             {
                 var dayShifts = new List<DayShiftDto>();
 
-                foreach (var (shift, index) in day.Shifts.WithIndex())
+                foreach (var shift in day.Shifts)
                 {
                     SetAvailableWorkerInDay(dayShifts, ref workers);
 
@@ -48,8 +56,6 @@ namespace WorkPlanner.V1.Services
 
                 responseDto.Add(new() { Date = day.ShiftDate.ToString("dddd, dd MMMM yyyy"), Shifts = dayShifts });
             }
-
-            return responseDto;
         }
     }
 }
